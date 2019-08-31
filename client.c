@@ -10,7 +10,7 @@
 #include <ctype.h>
 #include <signal.h>
 #include "thpool.h"
-#include "funzioni.h"
+#include "functions.h"
 
 void main(int argc, char const *argv[]) 
 { 
@@ -22,7 +22,7 @@ void main(int argc, char const *argv[])
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
     { 
         printf("\n Socket creation error \n"); 
-        exit(-1); 
+        exit(EXIT_FAILURE); 
     }
    
     memset(&serv_addr, '0', sizeof(serv_addr)); 
@@ -34,19 +34,19 @@ void main(int argc, char const *argv[])
     if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)  
     { 
         printf("\nInvalid address/ Address not supported \n"); 
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
     {
         printf("\nConnection Failed \n"); 
-        exit(-1); 
+        exit(EXIT_FAILURE); 
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
     
     do
     {
-        printf("1. BOOK \n2. CANCEL \n3. AVAILABLE \n4. EXIT\n");
+        printf("Operazioni disponibili:\nBOOK\nCANCEL\nAVAILABLE\nEXIT\n");
         memset(buffer, 0, sizeof(buffer));
         scanf("%s", buffer);
         choice = convertToIntC(buffer);
